@@ -4,8 +4,10 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - paddleLeft
-  - paddleRight
+  - Paddle
+  - Goal
+  - Powerup
+  - Ball
   layers:
   - Default
   - TransparentFX

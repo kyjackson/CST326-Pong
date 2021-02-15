@@ -5,11 +5,15 @@ using UnityEngine;
 public class Goal : MonoBehaviour
 {
     public PongBall ball;
+    public GameObject scoreDisplay;
+    public ScoreDisplay scores;
     public int scorePlayer1 = 0;
     public int scorePlayer2 = 0;
 
     private void Start()
     {
+        scoreDisplay = GameObject.Find("Scoreboard");
+        scores = scoreDisplay.GetComponent<ScoreDisplay>();
         ball = (PongBall)FindObjectOfType(typeof(PongBall));
     }
 
@@ -17,27 +21,24 @@ public class Goal : MonoBehaviour
     {
         if(this.name.Equals("Goal 1"))
         {
-            scorePlayer2++;
-            Debug.Log($"Player 2's Score: {scorePlayer2}");
+            scores.score2++;
+
+            //Debug.Log($"Player 2's Score: {scorePlayer2}");
+            ball.startDir = false;
+            ball.Reset();
+
         } else if(this.name.Equals("Goal 2"))
         {
-            scorePlayer1++;
-            Debug.Log($"Player 1's Score: {scorePlayer1}");
+            scores.score1++;
+
+            //Debug.Log($"Player 1's Score: {scorePlayer1}");
+            ball.startDir = true;
+            ball.Reset();
         }
 
-        if (scorePlayer1 == 5)
+        if (scores.score1 == 5 || scores.score2 == 5)
         {
-            Debug.Log("Player 1 Wins");
             ball.speed = 0;
-        }
-        else if (scorePlayer2 == 5)
-        {
-            Debug.Log("Player 2 Wins");
-            ball.speed = 0;
-        }
-
-        ball.Reset();
+        }   
     }
-    
-
 }
